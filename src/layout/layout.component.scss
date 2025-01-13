@@ -1,31 +1,26 @@
-// @use "../colors";
+@use "../colors";
 @use '@angular/material' as mat;
 
-
-
-// Customize the entire app. Change :root to your selector if you want to scope the styles.
-app-layout {
-  @include mat.toolbar-overrides((
-    container-background-color: orange,
-    container-text-color: red,
-  ));
-
-  @include mat.menu-overrides((
-    item-label-text-color: orange,
-    item-icon-color: red,
-  ));
-}
-
 .mat-toolbar {
-    // background-color: colors.$primary;
+    background-color: colors.$primary;
     color: whitesmoke;
     .mat-mdc-icon-button {
         color: whitesmoke;
     }
 }
 
+mat-nav-list {
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.5rem;
+}
+
+
 .mat-drawer {
-    width: 250px!important;
+  // background-color: colors.$dark-grey;
+  width: 250px!important;
 }
 
 .example-container {
@@ -69,7 +64,7 @@ h1.example-app-name {
   /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
      causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
   flex: 1;
-  background-color: whitesmoke;
+  background-color: var(--mat-sys-surface-container-high);
 }
 
 .example-is-mobile .example-sidenav-container {
