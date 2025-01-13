@@ -21,7 +21,7 @@ To build the project run:
 yarn run build
 ```
 
-## Running unit tests (still to implement)
+## Running unit tests (still to be implemented)
 
 To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
@@ -29,7 +29,7 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 yarn run test
 ```
 
-## Running end-to-end tests (still to implement)
+## Running end-to-end tests (still to be implemented)
 
 For end-to-end (e2e) testing, run:
 
@@ -37,8 +37,3 @@ For end-to-end (e2e) testing, run:
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
