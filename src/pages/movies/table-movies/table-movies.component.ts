@@ -1,6 +1,7 @@
 import { Component, input, computed } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { PercentPipe } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 export interface MovieData {
   id: number;
@@ -28,7 +29,7 @@ const MOVIES_DATA3: MovieData[] = [
 
 @Component({
   selector: 'app-table-movies',
-  imports: [MatTableModule, PercentPipe],
+  imports: [MatTableModule, PercentPipe, MatIconModule],
   templateUrl: './table-movies.component.html',
   styleUrl: './table-movies.component.scss',
 })

@@ -1,9 +1,10 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-  <mat-toolbar class="example-toolbar">
+<div class="container" [class.is-mobile]="mobileQuery.matches">
+  <!-- TOP TOOLBAR -->
+  <mat-toolbar class="toolbar">
     <div class="toolbar-content">
       <div>
         <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-        <h1 class="example-app-name">Angular backoffice simple</h1>
+        <h1 class="app-name">Angular backoffice simple</h1>
       </div>
       <div>
         <button mat-button [matMenuTriggerFor]="menu">{{username}}</button>
@@ -15,8 +16,11 @@
     </div>
   </mat-toolbar>
 
-  <mat-sidenav-container class="example-sidenav-container"
+  <!-- SIDENAV + CONTENT -->
+  <mat-sidenav-container class="sidenav-container"
                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+
+    <!-- SIDENAV -->
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
@@ -25,13 +29,15 @@
       </mat-nav-list>
     </mat-sidenav>
 
+    <!-- CONTENT -->
     <mat-sidenav-content>
       <mat-card appearance="outlined" class="content">
           <mat-card-content>
-              <router-outlet />
+            <!-- OUTLET -->
+            <router-outlet />
           </mat-card-content>
       </mat-card>
-          
     </mat-sidenav-content>
+
   </mat-sidenav-container>
 </div>

@@ -5,8 +5,8 @@
 
 $theme: mat.define-theme((
   color: (
-    theme-type: dark,
-    primary: mat.$azure-palette,
+    theme-type: light,
+    primary: mat.$red-palette,
   ),
   typography: (
     brand-family: 'Roboto',
@@ -18,7 +18,12 @@ $theme: mat.define-theme((
 ));
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+}
 
 html {
   // Emit theme-dependent styles for common features used across multiple components.
