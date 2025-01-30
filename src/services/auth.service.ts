@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable, tap } from "rxjs";
+import { catchError, Observable, tap } from "rxjs";
 
 export interface User {
     email: string;
@@ -33,8 +33,22 @@ export class AuthService {
    /**
    * Logout method to remove the JWT token from storage.
    */
-  logout(): void {
-    localStorage.removeItem('jwtToken');
+  // Logout method
+  logout(): Observable<string> {
+    // Use HttpClient's post method to call the backend API for logout
+    return this.http.post<string>(`${this.baseUrl}/logout`, null, { responseType: 'text' as 'json' })  // Posting null body
+      .pipe(
+        tap(response => {
+          console.log('Déconnexion réussie:', response);  // Log response to see if we get it
+          localStorage.removeItem('jwtToken');  // Remove the JWT token from local storage
+          this.router.navigate(['/login']);  // Redirect to the login page
+        }),
+        catchError(error => {
+          console.error('Erreur lors de la déconnexion:', error);
+          // Optionally handle the error and show a user-friendly message
+          return [];
+        })
+      );
   }
 
   /**

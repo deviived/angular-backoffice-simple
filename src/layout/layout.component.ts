@@ -33,7 +33,7 @@ export class LayoutComponent {
 
   private _mobileQueryListener: () => void;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService) {
     const changeDetectorRef = inject(ChangeDetectorRef);
     const media = inject(MediaMatcher);
 
@@ -48,7 +48,9 @@ export class LayoutComponent {
   }
 
   logout(): void {
-    // this.authService.logout()
-    this.router.navigate(['/login']);
+    this.authService.logout().subscribe(
+      (response) => console.log('Logged out successfully:', response),
+      (error) => console.error('Logout failed:', error)
+    );
   }
 }
