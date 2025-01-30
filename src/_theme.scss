@@ -4,6 +4,9 @@
 
 @use "@angular/material" as mat;
 
+// .mat-elevation-z8 {
+//   @include mat.elevation(1);
+// }
 
 /* Light Theme */
 :root, :host {
@@ -125,4 +128,16 @@
     inverse-secondary: #5e5e62,
     inverse-tertiary: #5e5f5b,
   ));
+}
+
+.mat-mdc-table {
+  > thead {
+    background-color: #b32442!important;
+    > tr > th {
+      color: white!important;
+    }
+  }
+  > tbody > tr {
+    background-color: var(--mat-menu-container-color);
+  }
 }

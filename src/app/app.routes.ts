@@ -4,6 +4,7 @@ import { MoviesComponent } from '../pages/movies/movies.component';
 import { LayoutComponent } from '../layout/layout.component';
 import { TableMoviesComponent } from '../pages/movies/table-movies/table-movies.component';
 import { LoginComponent } from './login/login.component';
+import { CreateMovieComponent } from '../pages/movies/create-movie/create-movie.component';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,10 @@ export const routes: Routes = [
             component: TableMoviesComponent,
           },
         ],
+      },
+      {
+        path: 'movie/create',
+        component: CreateMovieComponent,
       },
     ],
   },

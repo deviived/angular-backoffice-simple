@@ -1,7 +1,9 @@
-import { Component, input, computed } from '@angular/core';
+import { Component, input, computed, OnInit, signal, inject, effect } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { PercentPipe } from '@angular/common';
+import { CommonModule, PercentPipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { Movie, MoviesService } from '../../../services/movies.service';
+import { map, Observable, of } from 'rxjs';
 
 export interface MovieData {
   id: number;
@@ -29,22 +31,32 @@ const MOVIES_DATA3: MovieData[] = [
 
 @Component({
   selector: 'app-table-movies',
-  imports: [MatTableModule, PercentPipe, MatIconModule],
+  imports: [MatTableModule, PercentPipe, MatIconModule, CommonModule],
   templateUrl: './table-movies.component.html',
   styleUrl: './table-movies.component.scss',
 })
-export class TableMoviesComponent {
+export class TableMoviesComponent implements OnInit {
   category = input.required<string>();
-  displayedColumns: string[] = ['name', 'year', 'director', 'rating'];
-  dataSource = computed(() => {
-    switch(this.category()) {
-      case 'thriller':
-        return MOVIES_DATA;
-      case 'western':
-        return MOVIES_DATA2;
-      default:
-        return MOVIES_DATA3;
+  displayedColumns: string[] = ['title', 'year', 'director', 'rating'];
+
+  movies: Observable<Movie[]> = of([]);
+
+  constructor(private moviesService: MoviesService) {
+    this.movies = this.moviesService.movies$;
+    effect(() => {
+      this.getMovies()
+    })
+  }
+
+  getMovies() {
+    if (this.category()) {
+      this.moviesService.fetchMoviesByGenre(this.category());
     }
-  });
+    else this.moviesService.fetchAllMovies();
+  }
+
+  ngOnInit(): void {
+    
+  }
   
 }

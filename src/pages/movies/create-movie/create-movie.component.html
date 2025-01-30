@@ -1,0 +1,92 @@
+<div class="top-screen">
+    <p>
+      Create
+    </p>
+    <button mat-fab aria-label="go back" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+</div>
+
+<div class="movie-form">
+  <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+    <div>
+      <!-- Movie Title -->
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" placeholder="Enter movie title" />
+        @if (movieForm.get('title')?.hasError('required')) {
+          <mat-error>Title is required.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Director -->
+      <mat-form-field appearance="outline">
+        <mat-label>Director</mat-label>
+        <input matInput formControlName="director" placeholder="Enter director name" />
+        @if (movieForm.get('director')?.hasError('required')) {
+          <mat-error>Director is required.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Genre -->
+      <mat-form-field appearance="outline">
+        <mat-label>Genre</mat-label>
+        <mat-select formControlName="genre">
+          @for (genre of genres; track genre.key) {
+            <mat-option [value]="genre.key">
+              {{ genre.value }}
+            </mat-option>
+          }
+        </mat-select>
+        @if (movieForm.get('genre')?.hasError('required')) {
+          <mat-error>Genre is required.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Rating -->
+      <mat-form-field appearance="outline">
+        <mat-label>Rating</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="rating"
+          placeholder="Enter rating (1-5)"
+          min='1'
+          max='5'
+        />
+        @if (movieForm.get('rating')?.hasError('required')) {
+          <mat-error>Rating is required.</mat-error>
+        }
+        @if (movieForm.get('rating')?.hasError('min')) {
+          <mat-error>Rating must be at least 1.</mat-error>
+        }
+        @if (movieForm.get('rating')?.hasError('max')) {
+          <mat-error>Rating must be at most 5.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Movie Year -->
+      <mat-form-field appearance="outline">
+        <mat-label>Year</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="movie_year"
+          placeholder="Enter movie release year"
+        />
+        @if (movieForm.get('movie_year')?.hasError('required')) {
+          <mat-error>Year is required.</mat-error>
+        }
+        @if (movieForm.get('movie_year')?.hasError('min')) {
+          <mat-error>Year cannot be before 1888 (first movie).</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    
+
+    <!-- Submit Button -->
+    <button mat-raised-button color="primary" type="submit" [disabled]="movieForm.invalid">
+      Save Movie
+    </button>
+  </form>
+</div>

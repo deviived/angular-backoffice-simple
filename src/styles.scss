@@ -3,6 +3,10 @@
 
 @include mat.core();
 
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+
 $theme: mat.define-theme((
   color: (
     theme-type: light,

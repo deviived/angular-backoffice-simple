@@ -1,8 +1,22 @@
-<nav mat-tab-nav-bar [tabPanel]="tabPanel">
-  @for (genre of genres; track genre.id) {
-    <a mat-tab-link [routerLink]="[genre.path]" (click)="activeLink = genre.path" [active]="activeLink == genre.path">{{ genre.label }}</a>
-  }
-</nav>
-<mat-tab-nav-panel #tabPanel><router-outlet /></mat-tab-nav-panel>
+<div class="top-screen">
+  <p>
+    Movies
+  </p>
+  <button mat-fab aria-label="add movie" (click)="navigateToCreateMovie()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<div class="tab-container">
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+    @for (genre of genres; track genre.id) {
+      <a mat-tab-link [routerLink]="[genre.path]" (click)="activeLink = genre.path" [active]="activeLink == genre.path">{{ genre.label }}</a>
+    }
+  </nav>
+  <mat-tab-nav-panel #tabPanel>
+    <!-- Route to right table -->
+    <router-outlet />
+  </mat-tab-nav-panel>
+</div>
 
 

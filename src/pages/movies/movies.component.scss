@@ -1,0 +1,17 @@
+@use '@angular/material' as mat;
+
+:host {
+    @include mat.icon-overrides((
+      color: black,
+    ));
+  }
+
+.top-screen {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.tab-container {
+    margin-top: 1.4rem;
+}
