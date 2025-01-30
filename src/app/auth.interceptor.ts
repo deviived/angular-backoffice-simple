@@ -1,11 +1,13 @@
 import { HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, throwError } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { catchError, Observable, throwError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn) => {
     // Inject the Router inside the interceptor
     const router = inject(Router);
+    const toastr = inject(ToastrService);
     const token = localStorage.getItem('jwtToken');
 
     let clonedRequest = req;
@@ -25,6 +27,14 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
             if (error.status === 401) {
                 console.warn('Unauthorized! Redirecting to login...');
                 router.navigate(['/login']);
+            }
+
+            if(error.status === 403) {
+                if(error.error.error === "Token is expired") {
+                    toastr.error("Token is expired. Log in again.");
+                    router.navigate(['/login']);
+                    // return throwError(error);
+                }
             }
 
             // Return the error
